@@ -7,7 +7,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,7 +19,8 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView xmlTextView;
+        private Button btnParse;
+    private ListView listApps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +29,16 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        xmlTextView = (TextView) findViewById(R.id.xmlTextView);
+        btnParse = (Button)findViewById(R.id.btnParse);
+        btnParse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: Add parse activation code
+                
+            }
+        });
+        listApps = (ListView)findViewById(R.id.xmlListView);
+
 
         DownloadData downloadData = new DownloadData();
         downloadData.execute("http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=10/xml");
@@ -82,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             Log.d("DownloadData", "Result was " + result);
-            xmlTextView.setText(mFileContents);
+
         }
     }
 
